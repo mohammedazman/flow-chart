@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>json</title>
+    <script src="Chart.min.js"></script>
+<link href="css.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<div  class="chart-container" style="position: relative; height:20vh; width:40vw ;float: left">
+    <canvas id="myChart2"></canvas>
+</div>
+    
+    <div class="chart-container" style="position: relative; height:20vh; width:40vw ; float: right" >
+    <canvas id="myChart"  ></canvas>
+</div>
+
+<script>
+
+    var male=0;
+    var female=0;
+    var tazz=0;
+    var sanaa=0;
+    var aden=0;
+    var iib=0;
+
+    var studenst = '\n\
+            [{"name":"Mohammed","age":24 ,"city":"Tazz","gender":"m"},\n\
+             {"name":"Refat","age":18,"city":"Aden","gender":"m"},\n\
+             {"name":"Refat","age":18,"city":"Tazz","gender":"m"},\n\
+             {"name":"Refat","age":18,"city":"Sanaa","gender":"m"},\n\
+             {"name":"Refat","age":18,"city":"Tazz","gender":"m"},\n\
+             {"name":"Refat","age":18,"city":"Sanaa","gender":"m"},\n\
+             {"name":"Sara","age":15,"city":"Sanaa","gender":"f"},\n\
+             {"name":"Sara","age":15,"city":"IIb","gender":"m"},\n\
+             {"name":"Sara","age":15,"city":"Tazz","gender":"f"},\n\
+             {"name":"Sara","age":15,"city":"IIb","gender":"m"},\n\
+             {"name":"asma","age":25,"city":"Aden","gender":"f"},\n\
+             {"name":"asma","age":25,"city":"Sanaa","gender":"f"},\n\
+             {"name":"asma","age":25,"city":"Tazz","gender":"f"},\n\
+             {"name":"asma","age":25,"city":"Tazz","gender":"f"},\n\
+             {"name":"asma","age":25,"city":"Tazz","gender":"f"}]';
+
+    
+    JSON.parse(studenst).forEach(function (value) {
+            if (value["gender"] == "f")
+                female++;
+            else
+                male++;
+
+
+            if (value["city"] == "Tazz")
+                tazz++;
+            else if (value["city"] == "Sanaa")
+                sanaa++;
+            else if (value["city"] == "Aden")
+                aden++;
+            else if (value["city"] == "IIb")
+                iib++;
+
+        }
+
+
+    );
+//    document.write(male + "  " + females + "<br/>")
+
+
+
+    var ctx = document.getElementById('myChart');
+    var ctx2 = document.getElementById('myChart2');
+   
+    
+    var myChart2 = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['Male', 'Female'],
+            datasets: [{
+                label: '# of Votes',
+                data: [male, female],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    
+ var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Tazz', 'IIb','Sanaa','Aden'],
+            datasets: [{
+                label: '# of Votes',
+     
+                data: [tazz, iib,sanaa,aden],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+   
+</script>
+</body>
+</html>
